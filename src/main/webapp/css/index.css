@@ -1,0 +1,138 @@
+body {
+    background-color: #02040f;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+}
+#pawn{
+
+}
+
+#addTask{
+    width: 300px;
+}
+
+#addContainer{
+    height: 280px;
+    width: 305px;
+}
+
+#parentType{
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+}
+
+.article {
+    display: flex;
+    flex-direction: column;
+    margin: 0 14px 0 14px;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+    width: 400px;
+    background-color: #967AA1;
+}
+
+.article input {
+    margin-bottom: 25px;
+    width: 261px;
+}
+
+.article label {
+    margin: 10px;
+}
+
+#createBtn {
+    margin-top: 25px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 10px;
+    background-color: #FAD4C0;
+    border-radius: 10px;
+    width: 360px;
+    position: relative;
+}
+
+.card p {
+    margin: 10px;
+}
+
+.txtInput {
+    display: flex;
+    justify-content: left;
+    font-family: "Arial";
+    width: 265px;
+    margin-bottom: 5px;
+}
+
+.titleType{
+    font-family: "Arial";
+}
+
+.titleCard{
+    font-family: "Arial";
+    text-align: center;
+}
+.dateText{
+    color: gray;
+}
+
+.btnContainer {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+}
+
+.upBtn {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: #531253;
+}
+
+.downBtn {
+    width: 40px;
+    height: 40px;
+    margin-right: 262px;
+    background-color: #dd6e42;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-left: 8px;
+}
+
+.eraseBtn {
+    border-radius: 10px;
+    border: none;
+    cursor:pointer;
+    color: red;
+    background-color: #FAD4C0;
+    margin: 4px 0 0 340px;
+}
+
+#descriptionTask{
+    width: 262px;
+}
+
+.textType{
+    font-family: Arial;
+}
+
+#upBtnToDo{
+    margin-left: 312px;
+}
+
+#downBtnDone{
+    margin-right: 312px;
+}

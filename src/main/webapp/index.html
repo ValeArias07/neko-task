@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Neko Task 🐈 </title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <div id="container">
+
+        <div class="article" id="addContainer">
+            <!----------------------------------------------------------->
+            <div class="article" id="addTask">
+
+                <label class="titleType"> Nueva Tarea </label>
+                <div class="txtInput"> Titulo </div>
+                <input id="titleTask" type="text" placeholder="Titulo">
+                <div class="txtInput"> Descripción </div>
+                <textarea id="descriptionTask" type="text" placeholder="Descripcion"></textarea>
+                <button id="createBtn"> Crear </button>
+        </div>
+            <!----------------------------------------------------------->
+        </div >
+
+        <div id="parentType">
+            <div class="article" class="typeContainer">
+                <label class="titleType"> To Do </label>
+                <div class="article" id="todo"></div>
+            </div>
+
+            <div class="article" class="typeContainer">
+                <label class="titleType"> Doing </label>
+                <div class="article" id="doing"></div>
+
+            </div>
+            <div class="article" class="typeContainer">
+                <label class="titleType" > Done </label>
+                <div class="article" id="finish">
+
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/view.js"></script>
+<script src="js/task.js"></script>
+<script src="js/index.js"></script>
+</html>
