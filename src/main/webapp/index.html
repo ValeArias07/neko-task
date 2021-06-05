@@ -3,28 +3,39 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Neko Task 🐈 </title>
+    <title>Neko Task &#128062 </title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Work+Sans&display=swap');
+    </style>
 </head>
 
 <body>
 
     <div id="container">
 
+        <div class="catSign">
         <div class="article" id="addContainer">
+            <label class="titleType"> Nueva Tarea </label>
             <!----------------------------------------------------------->
             <div class="article" id="addTask">
-
-                <label class="titleType"> Nueva Tarea </label>
                 <div class="txtInput"> Titulo </div>
-                <input id="titleTask" type="text" placeholder="Titulo">
+                <input id="titleTask" type="text">
                 <div class="txtInput"> Descripción </div>
-                <textarea id="descriptionTask" type="text" placeholder="Descripcion"></textarea>
-                <button id="createBtn"> Crear </button>
+                <textarea id="descriptionTask" type="text"></textarea>
         </div>
             <!----------------------------------------------------------->
-        </div >
+            <button id="createBtn"> Crear </button>
 
+        </div>
+
+            <div>
+                <img src="images/niceCat.png" id="cat">
+                <p id="txtHelp"> Arrastra las tareas cada vez que avances!</p>
+            </div>
+        </div>
         <div id="parentType">
             <div class="article" class="typeContainer" id="todoContainer">
                 <label class="titleType"> To Do </label>

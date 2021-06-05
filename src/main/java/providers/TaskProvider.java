@@ -39,7 +39,6 @@ public class TaskProvider {
                 .replace("$CATEGORY","'"+task.getCategory()+"'")
                 .replace("$DATE","'"+task.getDate()+"'");
         connection.connect();
-        System.out.println(sql);
         connection.commandSQL(sql);
         connection.disconnect();
     }

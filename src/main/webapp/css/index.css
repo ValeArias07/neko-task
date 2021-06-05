@@ -6,17 +6,16 @@ body {
     display: flex;
     flex-direction: row;
 }
-#pawn{
-
-}
-
 #addTask{
-    width: 300px;
+    width:280px;
+    background-color: #dfd1d3;
 }
 
 #addContainer{
     height: 280px;
     width: 305px;
+    display: flex;
+    flex-direction: column;
 }
 
 #parentType{
@@ -61,30 +60,48 @@ body {
     border-radius: 10px;
     width: 360px;
     position: relative;
-}
-
-.card p {
-    margin: 10px;
+    cursor: grab;
 }
 
 .txtInput {
     display: flex;
     justify-content: left;
-    font-family: "Arial";
+    font-family: 'Work Sans', sans-serif;
     width: 265px;
     margin-bottom: 5px;
 }
 
-.titleType{
-    font-family: "Arial";
+#cat{
+    margin: 20px 20px 0 19px;
 }
-
-.titleCard{
-    font-family: "Arial";
+.titleType{
+    font-family: 'Fredoka One', cursive;
+    color: #531253;
+    font-size: 20px;
+}
+#paw{
+    height: 30px;
+    width: 30px;
+}
+.titleCardToDo{
+    font-family: 'Fredoka One', cursive;
     text-align: center;
+    color: #ef27a6;
+}
+.titleCardDoing{
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    color: #64b6ac;
+}
+.titleCardFinish{
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    color: #659157;
 }
 .dateText{
     color: gray;
+    font-family: 'Work Sans', sans-serif;
+    margin: 15px;
 }
 
 .btnContainer {
@@ -93,46 +110,31 @@ body {
     justify-content: right;
 }
 
-.upBtn {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    border-radius: 10px;
-    background-color: #531253;
+
+#descriptionTask{
+    width: 262px;
 }
 
-.downBtn {
-    width: 40px;
-    height: 40px;
-    margin-right: 262px;
-    background-color: #dd6e42;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    margin-left: 8px;
+.descriptionText{
+    color:#170312;
+    font-family: 'Fredoka One', cursive;
+    margin: 15px;
+}
+
+.textType{
+    font-family: 'Work Sans', sans-serif;
+    margin: 15px;
+}
+
+#txtHelp{
+    font-family: 'Work Sans', sans-serif;
+    color: #967AA1;
+    margin-left: 15px;
 }
 
 .eraseBtn {
     border-radius: 10px;
     border: none;
     cursor:pointer;
-    color: red;
-    background-color: #FAD4C0;
     margin: 4px 0 0 340px;
-}
-
-#descriptionTask{
-    width: 262px;
-}
-
-.textType{
-    font-family: Arial;
-}
-
-#upBtnToDo{
-    margin-left: 312px;
-}
-
-#downBtnDone{
-    margin-right: 312px;
 }

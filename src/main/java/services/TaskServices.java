@@ -61,7 +61,6 @@ public class TaskServices {
 
         try {
             TaskProvider taskProvider= new TaskProvider();
-            System.out.println(taskObj.toString());
             taskProvider.updateCategory(taskObj);
             return Response
                     .status(200)

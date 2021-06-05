@@ -16,7 +16,7 @@ addTask = () => {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(task));
     let view = new View(task);
-    todoCanvas.appendChild(view.renderToDo(task));
+    todoCanvas.appendChild(view.renderToDo(todoCanvas, task));
 
     const clean = () => {
         document.getElementById('titleTask').value = "";
@@ -34,11 +34,11 @@ const getAllToDoTask =()=>{
             for(let i=0; i<response.length; i++){
                 let taskToDoDTO = response[i];
                 let view = new View(taskToDoDTO);
-                view.onDeleteTask = () =>{
 
-                    todoCanvas.removeChild(document.getElementById('card'+taskToDoDTO.id));
-                };
-                todoCanvas.appendChild(view.renderToDo());
+                //console.log(todoCanvas.childNodes);
+                //todoCanvas.removeChild(document.getElementById('card'+taskToDoDTO.id));
+
+                todoCanvas.appendChild(view.renderToDo(todoCanvas));
             }
         }
     });
@@ -60,7 +60,7 @@ const getAllDoing =()=>{
                     doingCanvas.removeChild(document.getElementById(name));
                 };
 
-                doingCanvas.appendChild(view.renderDoing());
+                doingCanvas.appendChild(view.renderDoing(doingCanvas));
             }
         }
     });
@@ -81,7 +81,7 @@ const getAllFinish =()=>{
                     name ='card'+taskToDoDTO.id;
                     finishCanvas.removeChild(document.getElementById(name));
                 };
-                finishCanvas.appendChild(view.renderFinish());
+                finishCanvas.appendChild(view.renderFinish(finishCanvas));
             }
         }
     });
@@ -104,44 +104,50 @@ doneContainer.addEventListener('dragover', (e)=>{
 todoContainer.addEventListener('drop', (e)=>{
     e.preventDefault();
     let newTask = JSON.parse(e.dataTransfer.getData('task'));
-    if(newTask.category === 'Finish'){
-        finishCanvas.removeChild(document.getElementById('card'+newTask.id));
-    }else if(newTask.category === 'Doing'){
-        doingCanvas.removeChild(document.getElementById('card'+newTask.id));
+    if(newTask.category !== "To-Do") {
+        if (newTask.category === 'Finish') {
+            finishCanvas.removeChild(document.getElementById('card' + newTask.id));
+        } else if (newTask.category === 'Doing') {
+            doingCanvas.removeChild(document.getElementById('card' + newTask.id));
+        }
+        newTask.category = "To-Do";
+        let view = new View(newTask);
+        view.updateType(newTask);
+        todoCanvas.appendChild(view.renderToDo(todoCanvas));
     }
-    newTask.category="To-Do";
-    let view = new View(newTask);
-    view.updateType(newTask);
-    todoCanvas.appendChild(view.renderToDo());
 });
 
 
 doingContainer.addEventListener('drop', (e)=>{
     e.preventDefault();
     let newTask = JSON.parse(e.dataTransfer.getData('task'));
-    if(newTask.category === 'To-Do'){
-        todoCanvas.removeChild(document.getElementById('card'+newTask.id));
-    }else if(newTask.category === 'Finish'){
-        finishCanvas.removeChild(document.getElementById('card'+newTask.id));
+    if(newTask.category !== "Doing") {
+        if (newTask.category === 'To-Do') {
+            todoCanvas.removeChild(document.getElementById('card' + newTask.id));
+        } else if (newTask.category === 'Finish') {
+            finishCanvas.removeChild(document.getElementById('card' + newTask.id));
+        }
+        newTask.category = "Doing";
+        let view = new View(newTask);
+        view.updateType(newTask);
+        doingCanvas.appendChild(view.renderDoing(doingCanvas));
     }
-    newTask.category="Doing";
-    let view = new View(newTask);
-    view.updateType(newTask);
-    doingCanvas.appendChild(view.renderDoing());
 });
 
 doneContainer.addEventListener('drop', (e)=>{
     e.preventDefault();
     let newTask = JSON.parse(e.dataTransfer.getData('task'));
-    if(newTask.category === 'To-Do'){
-        todoCanvas.removeChild(document.getElementById('card'+newTask.id));
-    }else if(newTask.category === 'Doing'){
-        doingCanvas.removeChild(document.getElementById('card'+newTask.id));
+    if(newTask.category!== 'Finish') {
+        if (newTask.category === 'To-Do') {
+            todoCanvas.removeChild(document.getElementById('card' + newTask.id));
+        } else if (newTask.category === 'Doing') {
+            doingCanvas.removeChild(document.getElementById('card' + newTask.id));
+        }
+        newTask.category = "Finish";
+        let view = new View(newTask);
+        view.updateType(newTask);
+        finishCanvas.appendChild(view.renderFinish(finishCanvas));
     }
-    newTask.category="Finish";
-    let view = new View(newTask);
-    view.updateType(newTask);
-    finishCanvas.appendChild(view.renderFinish());
 });
 
 getAllToDoTask();
