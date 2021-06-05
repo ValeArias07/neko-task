@@ -3,13 +3,6 @@ class View{
     constructor(task){
         this.task=task;
         this.onDeleteTask = null;
-        this.up = null;
-        this.down = null;
-    }
-
-    reset=()=>{
-        this.up = null;
-        this.down = null;
     }
 
     deleteTask=()=>{
@@ -23,49 +16,14 @@ class View{
         xhr.send();
     }
 
-    upCategory=()=>{
-
-        if(this.task.category === "To-Do"){
-            this.task.category = "Doing";
-        }else if(this.task.category === "Doing"){
-            this.task.category = "Finish";
-        }
-
+    updateType=(task)=>{
         let xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange', ()=>{
-            if(xhr.readyState===4){
-                if(this.up!==null) {
-                    this.up();
-
-                }
-            }
-        });
-        xhr.open('PUT',"http://localhost:8081/Neko_Task_war/api/task/update");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(this.task));
-    }
-
-    downCategory=()=>{
-
-        if(this.task.category === "Doing"){
-            this.task.category = "To-Do";
-        }else if(this.task.category === "Finish"){
-            this.task.category = "Doing";
-        }
-
-        let xhr = new XMLHttpRequest();
-        xhr.addEventListener('readystatechange', ()=>{
-            if(xhr.readyState===4){
-                if(this.down!==null) this.down();
-            }
-        });
         xhr.open('PUT',"http://localhost:8081/Neko_Task_war/api/task/update");
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(this.task));
     }
 
     renderToDo =()=>{
-
         let component = document.createElement('div');
         let btnContainer = document.createElement('div');
         let eraseBtn = document.createElement('button');
@@ -84,7 +42,10 @@ class View{
         btnContainer.appendChild(eraseBtn);
         component.appendChild(propertiesContainer);
         eraseBtn.addEventListener('click', this.deleteTask);
-        
+        component.draggable = true;
+        component.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('task', JSON.stringify(this.task));
+        });
         return component;
     }
 
@@ -107,7 +68,10 @@ class View{
         propertiesContainer.innerHTML=properties;
         component.appendChild(propertiesContainer);
         eraseBtn.addEventListener('click', this.deleteTask);
-
+        component.draggable = true;
+        component.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('task', JSON.stringify(this.task));
+        });
         return component;
     }
 
@@ -132,6 +96,12 @@ class View{
         component.appendChild(propertiesContainer);
 
         eraseBtn.addEventListener('click', this.deleteTask);
+        component.draggable = true;
+
+        component.addEventListener('dragstart', e => {
+           e.dataTransfer.setData('task', JSON.stringify(this.task));
+           e.dataTransfer.setData('card',  JSON.stringify(component));
+        });
 
         return component;
     }

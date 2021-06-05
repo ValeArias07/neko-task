@@ -4,11 +4,9 @@ const description = document.getElementById('descriptionTask');
 let todoCanvas = document.getElementById('todo');
 let doingCanvas = document.getElementById('doing');
 let finishCanvas = document.getElementById('finish');
-
-addTodo=(task)=>{
-    let view = new View(task);
-    todoCanvas.appendChild(view.renderToDo(task));
-}
+let todoContainer = document.getElementById('todoContainer');
+let doingContainer = document.getElementById('doingContainer');
+let doneContainer= document.getElementById('doneContainer');
 
 addTask = () => {
 
@@ -17,8 +15,9 @@ addTask = () => {
     xhr.open("POST", "http://localhost:8081/Neko_Task_war/api/task/add");
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(task));
+    let view = new View(task);
+    todoCanvas.appendChild(view.renderToDo(task));
 
-    addTodo(task);
     const clean = () => {
         document.getElementById('titleTask').value = "";
         document.getElementById('descriptionTask').value = "";
@@ -32,17 +31,12 @@ const getAllToDoTask =()=>{
         if(xhr.readyState===4){
             let json = xhr.responseText;
             let response= JSON.parse(json);
-            console.log(json);
             for(let i=0; i<response.length; i++){
                 let taskToDoDTO = response[i];
                 let view = new View(taskToDoDTO);
                 view.onDeleteTask = () =>{
+
                     todoCanvas.removeChild(document.getElementById('card'+taskToDoDTO.id));
-                };
-                view.up = () =>{
-                    console.log(todoCanvas.childNodes);
-                    todoCanvas.removeChild(document.getElementById('card'+taskToDoDTO.id));
-                    doingCanvas.appendChild(view.renderDoing());
                 };
                 todoCanvas.appendChild(view.renderToDo());
             }
@@ -65,20 +59,7 @@ const getAllDoing =()=>{
                     name ='card'+taskToDoDTO.id;
                     doingCanvas.removeChild(document.getElementById(name));
                 };
-                view.up = () =>{
-                    let componentNew=view.renderFinish();
-                    componentNew.id='card'+taskToDoDTO.id;
-                    let novalue=document.createElement('div');
-                    doingCanvas.replaceChild(novalue,document.getElementById('card'+taskToDoDTO.id));
-                    finishCanvas.appendChild(componentNew);
-                    console.log(doingCanvas.childNodes);
-                };
-                view.down = ()=>{
-                    let componentNew=view.renderToDo();
-                    componentNew.id='card'+taskToDoDTO.id;
-                    doingCanvas.removeChild(document.getElementById('card'+taskToDoDTO.id));
-                    todoCanvas.appendChild(componentNew);
-                };
+
                 doingCanvas.appendChild(view.renderDoing());
             }
         }
@@ -92,7 +73,6 @@ const getAllFinish =()=>{
     xhr.addEventListener('readystatechange', ()=>{
         if(xhr.readyState===4){
             let json = xhr.responseText;
-            console.log(json);
             let response= JSON.parse(json);
             for(let i=0; i<response.length; i++){
                 let taskToDoDTO = response[i];
@@ -101,14 +81,6 @@ const getAllFinish =()=>{
                     name ='card'+taskToDoDTO.id;
                     finishCanvas.removeChild(document.getElementById(name));
                 };
-                view.down = ()=>{
-                    this.taskToDoDTO="Doing";
-                    view.reset();
-                    doingCanvas.appendChild(view.renderDoing());
-                    console.log('card'+taskToDoDTO.id);
-                    finishCanvas.removeChild(document.getElementById('card'+taskToDoDTO.id));
-                    console.log(finishcanvas.childNodes);
-                };
                 finishCanvas.appendChild(view.renderFinish());
             }
         }
@@ -116,6 +88,61 @@ const getAllFinish =()=>{
     xhr.open('GET',"http://localhost:8081/Neko_Task_war/api/task/getAllFinish");
     xhr.send();
 }
+
+todoContainer.addEventListener('dragover', (e)=>{
+    e.preventDefault();
+});
+
+doingContainer.addEventListener('dragover', (e)=>{
+    e.preventDefault();
+});
+
+doneContainer.addEventListener('dragover', (e)=>{
+    e.preventDefault();
+});
+
+todoContainer.addEventListener('drop', (e)=>{
+    e.preventDefault();
+    let newTask = JSON.parse(e.dataTransfer.getData('task'));
+    if(newTask.category === 'Finish'){
+        finishCanvas.removeChild(document.getElementById('card'+newTask.id));
+    }else if(newTask.category === 'Doing'){
+        doingCanvas.removeChild(document.getElementById('card'+newTask.id));
+    }
+    newTask.category="To-Do";
+    let view = new View(newTask);
+    view.updateType(newTask);
+    todoCanvas.appendChild(view.renderToDo());
+});
+
+
+doingContainer.addEventListener('drop', (e)=>{
+    e.preventDefault();
+    let newTask = JSON.parse(e.dataTransfer.getData('task'));
+    if(newTask.category === 'To-Do'){
+        todoCanvas.removeChild(document.getElementById('card'+newTask.id));
+    }else if(newTask.category === 'Finish'){
+        finishCanvas.removeChild(document.getElementById('card'+newTask.id));
+    }
+    newTask.category="Doing";
+    let view = new View(newTask);
+    view.updateType(newTask);
+    doingCanvas.appendChild(view.renderDoing());
+});
+
+doneContainer.addEventListener('drop', (e)=>{
+    e.preventDefault();
+    let newTask = JSON.parse(e.dataTransfer.getData('task'));
+    if(newTask.category === 'To-Do'){
+        todoCanvas.removeChild(document.getElementById('card'+newTask.id));
+    }else if(newTask.category === 'Doing'){
+        doingCanvas.removeChild(document.getElementById('card'+newTask.id));
+    }
+    newTask.category="Finish";
+    let view = new View(newTask);
+    view.updateType(newTask);
+    finishCanvas.appendChild(view.renderFinish());
+});
 
 getAllToDoTask();
 getAllDoing();
