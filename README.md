@@ -1,4 +1,4 @@
-#Neko Task😸
+# Neko Task😸
 
 This is a project that emulates a Trello´s board.
 
@@ -12,7 +12,7 @@ This is a project that emulates a Trello´s board.
 3. Delete the task that you want
 
 
-#✨ Screenshots: ✨
+# ✨ Screenshots: ✨
 
 **General shot:** 
 ![image](https://user-images.githubusercontent.com/54784992/120908173-62e5fe00-c62d-11eb-822b-fda8edf825ab.png)
