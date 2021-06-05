@@ -6,9 +6,9 @@ This is a project that emulates a Trello´s board.
 
 1. Create the amount of task that you want
 2. Move them in the three states:
-    🙀 To-Do state: Here you can find all the task that you have to do.
-    😼 Doing: Here you can find all the task that you are doing.
-    😺 Done: Here you can find all the tasks that you have done.
+  -  🙀 To-Do state: Here you can find all the task that you have to do.
+  -  😼 Doing: Here you can find all the task that you are doing.
+  -  😺 Done: Here you can find all the tasks that you have done.
 3. Delete the task that you want
 
 
