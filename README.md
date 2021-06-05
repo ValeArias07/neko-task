@@ -1,8 +1,8 @@
-# Neko Task😸
+# 😼 Neko Task 😸
 
 This is a project that emulates a Trello´s board.
 
-#Features:
+# Features 😻:
 
 1. Create the amount of task that you want
 2. Move them in the three states:
