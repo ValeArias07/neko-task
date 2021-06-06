@@ -19,13 +19,13 @@ class View{
                  }
             }
         });
-        xhr.open('DELETE','http://localhost:8081/Neko_Task_war/api/task/delete/'+this.task.id);
+        xhr.open('DELETE','api/task/delete/'+this.task.id);
         xhr.send();
     }
 
     updateType=(task)=>{
         let xhr = new XMLHttpRequest();
-        xhr.open('PUT',"http://localhost:8081/Neko_Task_war/api/task/update");
+        xhr.open('PUT',"api/task/update");
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(this.task));
     }

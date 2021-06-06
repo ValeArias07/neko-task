@@ -12,7 +12,7 @@ addTask = () => {
 
     let xhr = new XMLHttpRequest();
     const task = new Task(0, title.value, description.value, "To-Do", "03-06-2021");
-    xhr.open("POST", "http://localhost:8081/Neko_Task_war/api/task/add");
+    xhr.open("POST", "api/task/add");
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(task));
     let view = new View(task);
@@ -42,7 +42,7 @@ const getAllToDoTask =()=>{
             }
         }
     });
-    xhr.open('GET',"http://localhost:8081/Neko_Task_war/api/task/getAllToDo");
+    xhr.open('GET',"api/task/getAllToDo");
     xhr.send();
 }
 
@@ -64,7 +64,7 @@ const getAllDoing =()=>{
             }
         }
     });
-    xhr.open('GET',"http://localhost:8081/Neko_Task_war/api/task/getAllDoing");
+    xhr.open('GET',"api/task/getAllDoing");
     xhr.send();
 }
 
@@ -85,7 +85,7 @@ const getAllFinish =()=>{
             }
         }
     });
-    xhr.open('GET',"http://localhost:8081/Neko_Task_war/api/task/getAllFinish");
+    xhr.open('GET',"api/task/getAllFinish");
     xhr.send();
 }
 
